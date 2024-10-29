@@ -5,7 +5,7 @@ def receive_exact(conn, n):
     chunks = []
     bytes_received = 0
     while bytes_received < n:
-        chunk = conn.recv(1024)
+        chunk = conn.recv(min(n - bytes_received, 1024))
         if not chunk:
             raise ConnectionError("Connection lost")
         chunks.append(chunk)
